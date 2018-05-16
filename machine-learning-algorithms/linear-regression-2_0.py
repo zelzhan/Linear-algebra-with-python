@@ -43,6 +43,13 @@ def start():
     m0 = 0            #initial values of coefficients
     b0 = 0
 
+    input_val = []
+    output_val = []
+    for i in range(len(pdata)):
+        input_val.append(pdata[i,0])
+        output_val.append(pdata[i,1])
+
+
     print("Initial value of coefficients y=mx+b:\n "
           "m = {0} b = {1} and error is {2} \n".format(m0, b0, error(m0, b0, pdata)))
 
@@ -51,6 +58,20 @@ def start():
 
     print("Final value of coefficients y=mx+b:\n "
           "m = {0} b = {1} and error is {2}".format(m, b, error(m, b, pdata)))
+
+
+    #not the best way to represent fit line
+    #representation of linear regression results
+    y_vals = [m*x+b for x in range(20)]
+    x_vals = range(20)
+
+    plt.scatter(input_val, output_val)
+    plt.xlabel("Input")
+    plt.ylabel("Output")
+    plt.plot(x_vals, y_vals,color='blue', linewidth = 3)
+    plt.show()
+
+
 
 if __name__ == '__main__':
     start()
