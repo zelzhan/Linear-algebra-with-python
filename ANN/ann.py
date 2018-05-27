@@ -53,10 +53,14 @@ classifier.compile(optimizer = 'adam', loss = 'binary_crossentropy', metrics=['a
 
 classifier.fit(X_train, y_train, batch_size=10, nb_epoch = 100)
 
+customer = np.array([[0, 0, 500, 1, 40, 3, 60000, 2,  1, 1, 50000]])
+customer = scale.transform(customer)
 
 # Prediction
 y_predicted = classifier.predict(X_test)
 y_predicted = (y_predicted>0.5)
 
+customer_prediction = classifier.predict(customer)
+customer_prediction = (customer_prediction>0.5)
 # Checking the accuracy
 con_matrix = confusion_matrix(y_test, y_predicted)
