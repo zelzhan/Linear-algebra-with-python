@@ -12,11 +12,10 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 from sklearn.model_selection import train_test_split
-from sklearn.preprocessing import StandardScaler
+from sklearn.preprocessing import StandardScaler, LabelEncoder
 from sklearn.metrics import confusion_matrix
 from matplotlib.colors import ListedColormap
 from sklearn.linear_model import LogisticRegression
-from sklearn.preprocessing import LabelEncoder
 
 # importing dataset
 dataset = pd.read_csv('/home/stayal0ne/Machine-learning/datasets/bank.csv', sep=';')
@@ -24,6 +23,9 @@ dataset['age'] = dataset['age'].astype(float)
 dataset['balance'] = dataset['balance'].astype(float)
 X = dataset.iloc[:, [0, 5]].values
 y = dataset.iloc[:, -1].values
+
+pd1 = pd.DataFrame(X)
+pd2 = pd.DataFrame(y)
 
 
 
