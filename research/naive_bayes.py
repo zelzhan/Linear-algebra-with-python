@@ -97,15 +97,27 @@ if __name__ == '__main__':
     dataset = "bank-full.csv"
     accuracies = []
     
-    for i in range(10): 
-        X_train, X_test, y_train, y_test = preprocessing(dataset)
-        classifier = train(X_train, y_train)
+    dataset = "bank-full.csv"
+    X_train, X_test, y_train, y_test = preprocessing(dataset)
+    classifier = train(X_train, y_train)
+    y_pred = classifier.predict(X_test)
+    print(accuracy_score(y_test, y_pred))
+    
+    dataset = "bank.csv"
+    X_train, X_test, y_train, y_test = preprocessing(dataset)
+    y_pred = classifier.predict(X_test)
+    accuracy = accuracy_score(y_test, y_pred)
+    accuracies.append(accuracy)
+    
+#    for i in range(10): 
+#        X_train, X_test, y_train, y_test = preprocessing(dataset)
+#        classifier = train(X_train, y_train)
+#        
+#        y_pred = classifier.predict(X_test)
+#        accuracy = accuracy_score(y_test, y_pred)
+#        accuracies.append(accuracy)
         
-        y_pred = classifier.predict(X_test)
-        accuracy = accuracy_score(y_test, y_pred)
-        accuracies.append(accuracy)
-        
-    median_of_accuracies = reduce(lambda x, y: x + y, accuracies) / float(len(accuracies))
+#    median_of_accuracies = reduce(lambda x, y: x + y, accuracies) / float(len(accuracies))
     
 # naive_bayes = 0.87232
 

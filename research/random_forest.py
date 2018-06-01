@@ -105,7 +105,7 @@ def preprocessing(dataset):
 if __name__ == '__main__':
     
     accuracies = []
-    
+    print("Accuracies for train set: ")
     for i in range(10): 
         dataset = "bank-full.csv"
         X_train, X_test, y_train, y_test = preprocessing(dataset)
@@ -125,6 +125,7 @@ if __name__ == '__main__':
 # decision tree = 
 # random forest = 90.489, 100 trees
 # random_forest = 96.81, 1000 trees without oob_score
+# random_forest = 95.75, 1000 trees with oob_score
 
 
 
