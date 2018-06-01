@@ -4,7 +4,16 @@
 * ****************************************************************************
 *      Owner: stayal0ne <elzhan.zeinulla@nu.edu.kz>                          *
 *      Github: https://github.com/zelzhan                                    *
-*      Created: Fri Jun  1 20:24:00 2018 by stayal0ne                                        *
+*      Created: Fri Jun  1 22:17:17 2018 by stayal0ne                                        *
+******************************************************************************
+"""
+#!/usr/bin/env conda
+# -*- coding: utf-8 -*-
+"""
+* ****************************************************************************
+*      Owner: stayal0ne <elzhan.zeinulla@nu.edu.kz>                          *
+*      Github: https://github.com/zelzhan                                    *
+*      Created: Fri Jun  1 21:54:09 2018 by stayal0ne                                        *
 ******************************************************************************
 """
 
@@ -17,7 +26,7 @@ from sklearn.preprocessing import LabelEncoder, OneHotEncoder
 from sklearn.preprocessing import StandardScaler
 from sklearn.metrics import accuracy_score
 from sklearn.metrics import confusion_matrix
-from sklearn.naive_bayes import GaussianNB
+from sklearn.ensemble import RandomForestClassifier
 from sklearn.cross_validation import train_test_split
 from functools import reduce
 
@@ -77,7 +86,7 @@ def scale(X_train, X_test):
 
 def train(X_train, y_train):
     # Fitting Kernel SVM to the Training set
-    classifier = GaussianNB()
+    classifier = RandomForestClassifier(n_estimators = 1000, criterion = 'gini', oob_score = True)
     classifier.fit(X_train, y_train)
     return classifier
 
@@ -94,13 +103,18 @@ def preprocessing(dataset):
     return X_train, X_test, y_train, y_test
     
 if __name__ == '__main__':
-    dataset = "bank-full.csv"
+    
     accuracies = []
     
     for i in range(10): 
+        dataset = "bank-full.csv"
         X_train, X_test, y_train, y_test = preprocessing(dataset)
         classifier = train(X_train, y_train)
+        y_pred = classifier.predict(X_test)
+        print(accuracy_score(y_test, y_pred))
         
+        dataset = "bank.csv"
+        X_train, X_test, y_train, y_test = preprocessing(dataset)
         y_pred = classifier.predict(X_test)
         accuracy = accuracy_score(y_test, y_pred)
         accuracies.append(accuracy)
@@ -108,6 +122,15 @@ if __name__ == '__main__':
     median_of_accuracies = reduce(lambda x, y: x + y, accuracies) / float(len(accuracies))
     
 # naive_bayes = 0.87232
+# decision tree = 
+# random forest = 90.489, 100 trees
+# random_forest = 96.81, 1000 trees without oob_score
+
+
+
+
+
+
 
 
 

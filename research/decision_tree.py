@@ -4,7 +4,7 @@
 * ****************************************************************************
 *      Owner: stayal0ne <elzhan.zeinulla@nu.edu.kz>                          *
 *      Github: https://github.com/zelzhan                                    *
-*      Created: Fri Jun  1 20:24:00 2018 by stayal0ne                                        *
+*      Created: Fri Jun  1 21:54:09 2018 by stayal0ne                                        *
 ******************************************************************************
 """
 
@@ -17,7 +17,7 @@ from sklearn.preprocessing import LabelEncoder, OneHotEncoder
 from sklearn.preprocessing import StandardScaler
 from sklearn.metrics import accuracy_score
 from sklearn.metrics import confusion_matrix
-from sklearn.naive_bayes import GaussianNB
+from sklearn.tree import DecisionTreeClassifier
 from sklearn.cross_validation import train_test_split
 from functools import reduce
 
@@ -77,7 +77,7 @@ def scale(X_train, X_test):
 
 def train(X_train, y_train):
     # Fitting Kernel SVM to the Training set
-    classifier = GaussianNB()
+    classifier = DecisionTreeClassifier(criterion = "entropy")
     classifier.fit(X_train, y_train)
     return classifier
 
@@ -97,17 +97,27 @@ if __name__ == '__main__':
     dataset = "bank-full.csv"
     accuracies = []
     
-    for i in range(10): 
-        X_train, X_test, y_train, y_test = preprocessing(dataset)
-        classifier = train(X_train, y_train)
-        
-        y_pred = classifier.predict(X_test)
-        accuracy = accuracy_score(y_test, y_pred)
-        accuracies.append(accuracy)
-        
-    median_of_accuracies = reduce(lambda x, y: x + y, accuracies) / float(len(accuracies))
+    X_train, X_test, y_train, y_test = preprocessing(dataset)
+    classifier = train(X_train, y_train)
+    
+    y_pred = classifier.predict(X_test)
+    accuracy = accuracy_score(y_test, y_pred)
+
+    
+#    for i in range(10): 
+#        X_train, X_test, y_train, y_test = preprocessing(dataset)
+#        classifier = train(X_train, y_train)
+#        
+#        y_pred = classifier.predict(X_test)
+#        accuracy = accuracy_score(y_test, y_pred)
+#        accuracies.append(accuracy)
+#        
+#    median_of_accuracies = reduce(lambda x, y: x + y, accuracies) / float(len(accuracies))
     
 # naive_bayes = 0.87232
+
+
+
 
 
 
