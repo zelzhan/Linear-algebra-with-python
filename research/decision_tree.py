@@ -66,7 +66,7 @@ def encoder(X, y):
 
 def split(X, y):
     # Splitting the dataset into the Training set and Test set
-    return train_test_split(X, y, test_size = 0.25)
+    return train_test_split(X, y, test_size = 0.2)
 
 def scale(X_train, X_test):
     # Feature Scaling
@@ -94,31 +94,21 @@ def preprocessing(dataset):
     return X_train, X_test, y_train, y_test
     
 if __name__ == '__main__':
-    dataset = "bank-full.csv"
     accuracies = []
+    print("Accuracies for train set: ")
+    for i in range(10): 
+        dataset = "bank.csv"
+        X_train, X_test, y_train, y_test = preprocessing(dataset)
+        classifier = train(X_train, y_train)
+        y_pred = classifier.predict(X_test)
+        accuracy = accuracy_score(y_test, y_pred)
+        accuracies.append(accuracy)
+        print(accuracy)
+        
+    median_of_accuracies = reduce(lambda x, y: x + y, accuracies) / float(len(accuracies))
+    print(median_of_accuracies)
     
-    X_train, X_test, y_train, y_test = preprocessing(dataset)
-    classifier = train(X_train, y_train)
     
-    y_pred = classifier.predict(X_test)
-    accuracy = accuracy_score(y_test, y_pred)
-
+# Decision_tree = 86,69%, criterion = "entropy"
     
-#    for i in range(10): 
-#        X_train, X_test, y_train, y_test = preprocessing(dataset)
-#        classifier = train(X_train, y_train)
-#        
-#        y_pred = classifier.predict(X_test)
-#        accuracy = accuracy_score(y_test, y_pred)
-#        accuracies.append(accuracy)
-#        
-#    median_of_accuracies = reduce(lambda x, y: x + y, accuracies) / float(len(accuracies))
     
-# naive_bayes = 0.87232
-
-
-
-
-
-
-

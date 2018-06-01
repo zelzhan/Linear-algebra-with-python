@@ -7,15 +7,6 @@
 *      Created: Fri Jun  1 22:17:17 2018 by stayal0ne                                        *
 ******************************************************************************
 """
-#!/usr/bin/env conda
-# -*- coding: utf-8 -*-
-"""
-* ****************************************************************************
-*      Owner: stayal0ne <elzhan.zeinulla@nu.edu.kz>                          *
-*      Github: https://github.com/zelzhan                                    *
-*      Created: Fri Jun  1 21:54:09 2018 by stayal0ne                                        *
-******************************************************************************
-"""
 
 # Importing the libraries
 import numpy as np
@@ -75,7 +66,7 @@ def encoder(X, y):
 
 def split(X, y):
     # Splitting the dataset into the Training set and Test set
-    return train_test_split(X, y, test_size = 0.25)
+    return train_test_split(X, y, test_size = 0.2)
 
 def scale(X_train, X_test):
     # Feature Scaling
@@ -86,7 +77,7 @@ def scale(X_train, X_test):
 
 def train(X_train, y_train):
     # Fitting Kernel SVM to the Training set
-    classifier = RandomForestClassifier(n_estimators = 1000, criterion = 'gini', oob_score = True)
+    classifier = RandomForestClassifier(n_jobs = -1, n_estimators = 1000, criterion = 'gini', oob_score = True)
     classifier.fit(X_train, y_train)
     return classifier
 
@@ -106,26 +97,26 @@ if __name__ == '__main__':
     
     accuracies = []
     print("Accuracies for train set: ")
-    for i in range(10): 
-        dataset = "bank-full.csv"
+    for i in range(30): 
+        dataset = "bank.csv"
         X_train, X_test, y_train, y_test = preprocessing(dataset)
         classifier = train(X_train, y_train)
         y_pred = classifier.predict(X_test)
-        print(accuracy_score(y_test, y_pred))
-        
-        dataset = "bank.csv"
-        X_train, X_test, y_train, y_test = preprocessing(dataset)
-        y_pred = classifier.predict(X_test)
         accuracy = accuracy_score(y_test, y_pred)
         accuracies.append(accuracy)
+        print(accuracy)
         
     median_of_accuracies = reduce(lambda x, y: x + y, accuracies) / float(len(accuracies))
-    
-# naive_bayes = 0.87232
-# decision tree = 
-# random forest = 90.489, 100 trees
-# random_forest = 96.81, 1000 trees without oob_score
-# random_forest = 95.75, 1000 trees with oob_score
+    print(median_of_accuracies)
+
+
+
+# random forest = 89.97, 100 trees 'gini'
+# random forest = 89.48, 100 trees 'entropy'
+# random forest = 89.88  500 trees 'gini'
+# random forest = 89.85  500 trees 'entropy
+# random forest = 89.67, 1000 trees, 'gini'
+# random forest = 89.55  1000 trees 'entropy
 
 
 

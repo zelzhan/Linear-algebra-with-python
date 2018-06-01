@@ -66,7 +66,7 @@ def encoder(X, y):
 
 def split(X, y):
     # Splitting the dataset into the Training set and Test set
-    return train_test_split(X, y, test_size = 0.25)
+    return train_test_split(X, y, test_size = 0.2)
 
 def scale(X_train, X_test):
     # Feature Scaling
@@ -97,21 +97,19 @@ if __name__ == '__main__':
     accuracies = []
     print("Accuracies for train set: ")
     for i in range(10): 
-        dataset = "bank-full.csv"
+        dataset = "bank.csv"
         X_train, X_test, y_train, y_test = preprocessing(dataset)
         classifier = train(X_train, y_train)
         y_pred = classifier.predict(X_test)
-        print(accuracy_score(y_test, y_pred))
-        
-        dataset = "bank.csv"
-        X_train, X_test, y_train, y_test = preprocessing(dataset)
-        y_pred = classifier.predict(X_test)
         accuracy = accuracy_score(y_test, y_pred)
         accuracies.append(accuracy)
+        print(accuracy)
         
     median_of_accuracies = reduce(lambda x, y: x + y, accuracies) / float(len(accuracies))
-#    
-# naive_bayes = 0.87232
+    print(median_of_accuracies)
+    
+# naive_bayes = 0.87232, **train/test ratio** = 75/25
+# naive_bayes = 0.86795, **train/test ratio** = 80/20    
 
 
 
