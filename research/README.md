@@ -21,15 +21,14 @@
 
 ## Random Forest: ##
 
-| Attempt | Parameters                                                    | Accuracy %      | |
-| ------- | ------------------------------------------------------------- | --------------- | -------------------------------------------------------------- |
-|     1   |**trees** = 1000, **oob_score** = True, **criterion** = 'gini' |            ||
-|     2   |**trees** = 1000, **oob_score** = True, **criterion** = 'gini' ||
-|     3   |**trees** = 1000, **oob_score** = True, **criterion** = 'gini' ||
-|     4   |**trees** = 1000, **oob_score** = True, **criterion** = 'gini' ||
-|     5   |**trees** = 1000, **oob_score** = True, **criterion** = 'gini' ||
-|     6   |**trees** = 1000, **oob_score** = True, **criterion** = 'gini' ||
-|     7   |**trees** = 1000, **oob_score** = True, **criterion** = 'gini' ||
+| Attempt | Parameters                                                       | Accuracy %      | 
+| ------- | ---------------------------------------------------------------- | --------------- | 
+|     1   |**trees** = 100, **oob_score** = True, **criterion** = 'gini'     | 89.97           |
+|     2   |**trees** = 100, **oob_score** = True, **criterion** = 'entropy'  | 89.48           |
+|     3   |**trees** = 500, **oob_score** = True, **criterion** = 'gini'     | 89.88           |
+|     4   |**trees** = 500, **oob_score** = True, **criterion** = 'entropy'  | 89.85           |
+|     5   |**trees** = 1000, **oob_score** = True, **criterion** = 'gini'    | 89.67           |
+|     6   |**trees** = 1000, **oob_score** = True, **criterion** = 'entropy' | 89.55           |
 
 ## Decision Tree: ##
 
