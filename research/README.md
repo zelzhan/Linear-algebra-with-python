@@ -7,12 +7,12 @@
 |  Support Vector Machine     |                 ||
 |  Random Forest              |     95.75       | **trees** = 1000, **oob_score** = True, **criterion** = 'gini' |
 
-#**Attempts** (Reasoning of choosing such parameters see in the paper):#
+# **Attempts** (Reasoning of choosing such parameters see in the paper): #
 
-##Naive Bayes:##
+## Naive Bayes: ##
 
-| Parameters | Accuracy % | 
+| Parameters                  | Accuracy %      | |
 | --------------------------- | --------------- | -------------------------------------------------------------- |
-|  **priors** = None  |                 ||
-|           |                 ||
+|  **priors** = None          |                 ||
+|                             |                 ||
 
