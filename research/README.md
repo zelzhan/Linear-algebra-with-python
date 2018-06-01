@@ -2,20 +2,20 @@
 | Algorithms  | Best Accuracy % | Parameters
 | --------------------------- | --------------- | -------------------------------------------------------------- |
 |  Artificial Neural Network  |                 ||
-|  Decision Tree              |     87.27       ||
-|  Naive Bayes                |     86.03       |**priors** = None|
+|  Decision Tree              |     87.27       |**criterion** = 'entropy'  **train/test ratio** = 80/20         |
+|  Naive Bayes                |     86.03       |**priors** = None, **train/test ratio** = 75/25                 |
 |  Support Vector Machine     |                 ||
-|  Random Forest              |     95.75       | **trees** = 1000, **oob_score** = True, **criterion** = 'gini' |
+|  Random Forest              |     89.97       | **trees** = 1000, **oob_score** = True, **criterion** = 'gini' |
 
 # Attempts: #
 (Reasoning of choosing such parameters see in the paper)
 
 ## Naive Bayes: ##
 
-| Attempt | Parameters                                           | Accuracy %      | |
-| ------- | ---------------------------------------------------- | --------------- | -------------------------------------------------------------- |
-|     1   |**priors** = None, **train/test ratio** = 75/25       | 87.23           ||
-|     2   |**priors** = None, **train/test ratio** = 80/20       | 86.79|
+| Attempt | Parameters                                           | Accuracy %      |
+| ------- | ---------------------------------------------------- | --------------- |
+|     1   |**priors** = None, **train/test ratio** = 75/25       | 87.23           |
+|     2   |**priors** = None, **train/test ratio** = 80/20       | 86.79           |
 
 
 

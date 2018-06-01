@@ -20,6 +20,7 @@ from sklearn.metrics import confusion_matrix
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.cross_validation import train_test_split
 from functools import reduce
+from sklearn.model_selection import cross_val_score
 
 # Importing the dataset
 def import_dataset(dataset):
@@ -95,6 +96,7 @@ def preprocessing(dataset):
     
 if __name__ == '__main__':
     accuracies = []
+
     print("Accuracies for train set: ")
     for i in range(10): 
         dataset = "bank.csv"
@@ -107,7 +109,6 @@ if __name__ == '__main__':
         
     median_of_accuracies = reduce(lambda x, y: x + y, accuracies) / float(len(accuracies))
     print(median_of_accuracies)
-    
     
 # Decision_tree = 86,69%, criterion = "entropy"
     
