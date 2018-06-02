@@ -16,6 +16,7 @@ import pandas as pd
 from sklearn.preprocessing import Imputer
 from sklearn.preprocessing import LabelEncoder, OneHotEncoder
 from sklearn.metrics import accuracy_score
+from sklearn.model_selection import cross_val_score
 from functools import reduce
 
 # Importing the dataset
@@ -81,11 +82,6 @@ def train(X_train, y_train):
     classifier.fit(X_train, y_train)
     return classifier
 
-#def predict(X_test, classifier):
-#    # Predicting the Test set results
-#    y_pred = classifier.predict(X_test)
-#    return y_pred
-
 def conf_matrix():
     # Making the Confusion Matrix
     from sklearn.metrics import confusion_matrix
@@ -98,21 +94,30 @@ def preprocessing(dataset):
     X_train, X_test, y_train, y_test = split(X, y)
     X_train, X_test = scale(X_train, X_test)
     return X_train, X_test, y_train, y_test
+
+def grid_search(classifier, X_train, y_train):
+    from sklearn.model_selection import GridSearchCV
+    params = [{'C':[1, 5, 10], 'kernel':['linear']}]
+    grid = GridSearchCV(estimator = classifier,
+                        param_grid = params,
+                        scoring = 'accuracy',
+                        cv = 10,
+                        n_jobs = -1)
+    grid = grid.fit(X_train, y_train)
+    return grid
     
 if __name__ == '__main__':
     dataset = "bank-full.csv"
-    accuracies = []
+    X_train, X_test, y_train, y_test = preprocessing(dataset)
+    classifier = train(X_train, y_train)
+    y_pred = classifier.predict(X_test)
     
-    for i in range(10): 
-        X_train, X_test, y_train, y_test = preprocessing(dataset)
-        classifier = train(X_train, y_train)
-        
-        y_pred = classifier.predict(X_test)
-        accuracy = accuracy_score(y_test, y_pred)
-        accuracies.append(accuracy)
-        
-    median_of_accuracies = reduce(lambda x, y: x + y, accuracies) / float(len(accuracies))
+    accuracy = accuracy_score(y_test, y_pred)
+    grid_object = grid_search(classifier, X_train, y_train)
     
+#    k_fold_accuracy = cross_val_score(estimator = classifier, X = X_train, y = y_train, cv = 10, n_jobs=-1)
+#    k_fold_accuracy.mean()
+
 # linear = 0.8955144
 # polynomial = 0.89719
 # sigmoid = 0.86516
