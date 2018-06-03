@@ -18,6 +18,8 @@ from sklearn.preprocessing import LabelEncoder, OneHotEncoder
 from sklearn.metrics import accuracy_score
 from sklearn.model_selection import cross_val_score
 from functools import reduce
+import scikitplot as skplt
+from scipy import integrate
 
 # Importing the dataset
 def import_dataset(dataset):
@@ -78,7 +80,7 @@ def scale(X_train, X_test):
 def train(X_train, y_train):
     # Fitting Kernel SVM to the Training set
     from sklearn.svm import SVC
-    classifier = SVC(kernel = 'rbf')
+    classifier = SVC(kernel = 'rbf', probability = True)
     classifier.fit(X_train, y_train)
     return classifier
 
@@ -95,6 +97,54 @@ def preprocessing(dataset):
     X_train, X_test = scale(X_train, X_test)
     return X_train, X_test, y_train, y_test
 
+def capcurve(y_values, y_preds_proba):
+    num_pos_obs = np.sum(y_values)
+    num_count = len(y_values)
+    rate_pos_obs = float(num_pos_obs) / float(num_count)
+    ideal = pd.DataFrame({'x':[0,rate_pos_obs,1],'y':[0,1,1]})
+    xx = np.arange(num_count) / float(num_count - 1)
+    
+    y_cap = np.c_[y_values,y_preds_proba]
+    y_cap_df_s = pd.DataFrame(data=y_cap)
+    y_cap_df_s = y_cap_df_s.sort_values([1], ascending=True).reset_index(level = y_cap_df_s.index.names, drop=True)
+    
+    print(y_cap_df_s.head(20))
+    
+    yy = np.cumsum(y_cap_df_s[0]) / float(num_pos_obs)
+    yy = np.append([0], yy[0:num_count-1]) #add the first curve point (0,0) : for xx=0 we have yy=0
+    
+    percent = 0.5
+    row_index = int(np.trunc(num_count * percent))
+    
+    val_y1 = yy[row_index]
+    val_y2 = yy[row_index+1]
+    if val_y1 == val_y2:
+        val = val_y1*1.0
+    else:
+        val_x1 = xx[row_index]
+        val_x2 = xx[row_index+1]
+        val = val_y1 + ((val_x2 - percent)/(val_x2 - val_x1))*(val_y2 - val_y1)
+    
+    fig, ax = plt.subplots(nrows = 1, ncols = 1)
+    ax.plot(ideal['x'],ideal['y'], color='grey', label='Perfect Model')
+    ax.plot(xx,yy, color='red', label='User Model')
+    ax.plot(xx,xx, color='blue', label='Random Model')
+    ax.plot([percent, percent], [0.0, val], color='green', linestyle='--', linewidth=1)
+    ax.plot([0, percent], [val, val], color='green', linestyle='--', linewidth=1, label=str(val*100)+'% of positive obs at '+str(percent*100)+'%')
+    
+    plt.xlim(0, 1.02)
+    plt.ylim(0, 1.25)
+    plt.title("Support Vector Machine")
+    plt.xlabel('% of the data')
+    plt.ylabel('% of positive obs')
+    plt.legend()
+    
+    plt.savefig('SVM_cap_graph.pdf')
+
+def roccurve(y_test, y_proba):
+    skplt.metrics.plot_roc(y_test, y_proba)
+    plt.savefig('SVM_roc_fig.pdf')
+
 def grid_search(classifier, X_train, y_train):
     from sklearn.model_selection import GridSearchCV
     params = [{'C':[1, 5, 10], 'kernel':['linear']}]
@@ -107,25 +157,39 @@ def grid_search(classifier, X_train, y_train):
     return grid
     
 if __name__ == '__main__':
-    dataset = "bank-full.csv"
+    
+    dataset = "bank.csv"
     X_train, X_test, y_train, y_test = preprocessing(dataset)
-    classifier = train(X_train, y_train)
+    
+    #training of the classifier
+    classifier = train(X_train, y_train) 
+    
+    #prediction process
     y_pred = classifier.predict(X_test)
     
-    accuracy = accuracy_score(y_test, y_pred)
-#    grid_object = grid_search(classifier, X_train, y_train)
-    import scikitplot as skplt
-    import matplotlib.pyplot as plt
-    skplt.metrics.plot_roc(y_test, y_proba)
-    plt.show()
-    plt.savefig('roc_fig.pdf')
-
+    #calculation of the k-fold accuracy
+    k_fold_accuracy_train = cross_val_score(estimator = classifier, X = X_train, y = y_train, cv = 10)
+    k_fold_accuracy_train = k_fold_accuracy_train.mean()
     
-    k_fold_accuracy = cross_val_score(estimator = classifier, X = X_train, y = y_train, cv = 10)
-    k_fold_accuracy.mean()
+    k_fold_accuracy_test = cross_val_score(estimator = classifier, X = X_test, y = y_test, cv = 10)
+    k_fold_accuracy_test = k_fold_accuracy_test.mean()
+        
+    #calculations of the probabilities
+    y_proba = classifier.predict_proba(X_test)
+    
+    #plotting the roccurve
+    roccurve(y_test, y_proba)
+    capcurve(y_test, y_proba)
 
-# linear = 0.8955144
-# polynomial = 0.89719
-# sigmoid = 0.86516
-# rbf = 0.900371
 
+
+# random forest = 89.97, 100 trees 'gini'
+# random forest = 89.48, 100 trees 'entropy'
+# random forest = 89.88  500 trees 'gini'
+# random forest = 89.85  500 trees 'entropy
+# random forest = 89.67, 1000 trees, 'gini'
+# random forest = 89.55  1000 trees 'entropy
+
+'''Final result: k_fold_accuracy_train = 89.351
+                 k_fold_accuracy_test = 90.186 
+'''
