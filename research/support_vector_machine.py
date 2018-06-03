@@ -113,10 +113,16 @@ if __name__ == '__main__':
     y_pred = classifier.predict(X_test)
     
     accuracy = accuracy_score(y_test, y_pred)
-    grid_object = grid_search(classifier, X_train, y_train)
+#    grid_object = grid_search(classifier, X_train, y_train)
+    import scikitplot as skplt
+    import matplotlib.pyplot as plt
+    skplt.metrics.plot_roc(y_test, y_proba)
+    plt.show()
+    plt.savefig('roc_fig.pdf')
+
     
-#    k_fold_accuracy = cross_val_score(estimator = classifier, X = X_train, y = y_train, cv = 10, n_jobs=-1)
-#    k_fold_accuracy.mean()
+    k_fold_accuracy = cross_val_score(estimator = classifier, X = X_train, y = y_train, cv = 10)
+    k_fold_accuracy.mean()
 
 # linear = 0.8955144
 # polynomial = 0.89719

@@ -19,7 +19,12 @@ from sklearn.metrics import accuracy_score
 from sklearn.metrics import confusion_matrix
 from sklearn.naive_bayes import GaussianNB
 from sklearn.cross_validation import train_test_split
+from sklearn.model_selection import cross_val_score
+import scikitplot as skplt
+import matplotlib.pyplot as plt
 from functools import reduce
+from scipy import integrate
+
 
 # Importing the dataset
 def import_dataset(dataset):
@@ -92,21 +97,82 @@ def preprocessing(dataset):
     X_train, X_test, y_train, y_test = split(X, y)
     X_train, X_test = scale(X_train, X_test)
     return X_train, X_test, y_train, y_test
+
+def capcurve(y_values, y_preds_proba):
+    num_pos_obs = np.sum(y_values)
+    num_count = len(y_values)
+    rate_pos_obs = float(num_pos_obs) / float(num_count)
+    ideal = pd.DataFrame({'x':[0,rate_pos_obs,1],'y':[0,1,1]})
+    xx = np.arange(num_count) / float(num_count - 1)
+    
+    y_cap = np.c_[y_values,y_preds_proba]
+    y_cap_df_s = pd.DataFrame(data=y_cap)
+    y_cap_df_s = y_cap_df_s.sort_values([1], ascending=True).reset_index(level = y_cap_df_s.index.names, drop=True)
+    
+    print(y_cap_df_s.head(20))
+    
+    yy = np.cumsum(y_cap_df_s[0]) / float(num_pos_obs)
+    yy = np.append([0], yy[0:num_count-1]) #add the first curve point (0,0) : for xx=0 we have yy=0
+    
+    percent = 0.5
+    row_index = int(np.trunc(num_count * percent))
+    
+    val_y1 = yy[row_index]
+    val_y2 = yy[row_index+1]
+    if val_y1 == val_y2:
+        val = val_y1*1.0
+    else:
+        val_x1 = xx[row_index]
+        val_x2 = xx[row_index+1]
+        val = val_y1 + ((val_x2 - percent)/(val_x2 - val_x1))*(val_y2 - val_y1)
+    
+    sigma_ideal = 1 * xx[num_pos_obs - 1 ] / 2 + (xx[num_count - 1] - xx[num_pos_obs]) * 1
+    sigma_model = integrate.simps(yy,xx)
+    sigma_random = integrate.simps(xx,xx)
+    
+    ar_value = (sigma_model - sigma_random) / (sigma_ideal - sigma_random)
+    
+    fig, ax = plt.subplots(nrows = 1, ncols = 1)
+    ax.plot(ideal['x'],ideal['y'], color='grey', label='Perfect Model')
+    ax.plot(xx,yy, color='red', label='User Model')
+    ax.plot(xx,xx, color='blue', label='Random Model')
+    ax.plot([percent, percent], [0.0, val], color='green', linestyle='--', linewidth=1)
+    ax.plot([0, percent], [val, val], color='green', linestyle='--', linewidth=1, label=str(val*100)+'% of positive obs at '+str(percent*100)+'%')
+    
+    plt.xlim(0, 1.02)
+    plt.ylim(0, 1.25)
+    plt.title("CAP Curve - a_r value ="+str(ar_value))
+    plt.xlabel('% of the data')
+    plt.ylabel('% of positive obs')
+    plt.legend()
+    
+    plt.savefig('NB_cap_graph.pdf')
+    
+def roccurve(y_test, y_proba):
+    skplt.metrics.plot_roc(y_test, y_proba)
+    plt.savefig('NB_roc_fig.pdf')
     
 if __name__ == '__main__':
-    accuracies = []
-    print("Accuracies for train set: ")
-    for i in range(10): 
-        dataset = "bank.csv"
-        X_train, X_test, y_train, y_test = preprocessing(dataset)
-        classifier = train(X_train, y_train)
-        y_pred = classifier.predict(X_test)
-        accuracy = accuracy_score(y_test, y_pred)
-        accuracies.append(accuracy)
-        print(accuracy)
+    dataset = "bank.csv"
+    X_train, X_test, y_train, y_test = preprocessing(dataset)
+    
+    #training of the classifier
+    classifier = train(X_train, y_train) 
+    
+    #prediction process
+    y_pred = classifier.predict(X_test)
+    
+    #calculation of the k-fold accuracy
+    k_fold_accuracy = cross_val_score(estimator = classifier, X = X_train, y = y_train, cv = 10)
+    k_fold_accuracy = k_fold_accuracy.mean()
         
-    median_of_accuracies = reduce(lambda x, y: x + y, accuracies) / float(len(accuracies))
-    print(median_of_accuracies)
+    #calculations of the probabilities
+    y_proba = classifier.predict_proba(X_test)
+    
+    #plotting the roccurve
+    roccurve(y_test, y_proba)
+    capcurve(y_test, y_proba)
+
     
 # naive_bayes = 0.87232, **train/test ratio** = 75/25
 # naive_bayes = 0.86795, **train/test ratio** = 80/20    
