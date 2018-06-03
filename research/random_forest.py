@@ -125,12 +125,6 @@ def capcurve(y_values, y_preds_proba):
         val_x2 = xx[row_index+1]
         val = val_y1 + ((val_x2 - percent)/(val_x2 - val_x1))*(val_y2 - val_y1)
     
-    sigma_ideal = 1 * xx[num_pos_obs - 1 ] / 2 + (xx[num_count - 1] - xx[num_pos_obs]) * 1
-    sigma_model = integrate.simps(yy,xx)
-    sigma_random = integrate.simps(xx,xx)
-    
-    ar_value = (sigma_model - sigma_random) / (sigma_ideal - sigma_random)
-    
     fig, ax = plt.subplots(nrows = 1, ncols = 1)
     ax.plot(ideal['x'],ideal['y'], color='grey', label='Perfect Model')
     ax.plot(xx,yy, color='red', label='User Model')

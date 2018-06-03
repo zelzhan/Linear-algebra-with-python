@@ -126,12 +126,6 @@ def capcurve(y_values, y_preds_proba):
         val_x2 = xx[row_index+1]
         val = val_y1 + ((val_x2 - percent)/(val_x2 - val_x1))*(val_y2 - val_y1)
     
-    sigma_ideal = 1 * xx[num_pos_obs - 1 ] / 2 + (xx[num_count - 1] - xx[num_pos_obs]) * 1
-    sigma_model = integrate.simps(yy,xx)
-    sigma_random = integrate.simps(xx,xx)
-    
-    ar_value = (sigma_model - sigma_random) / (sigma_ideal - sigma_random)
-    
     fig, ax = plt.subplots(nrows = 1, ncols = 1)
     ax.plot(ideal['x'],ideal['y'], color='grey', label='Perfect Model')
     ax.plot(xx,yy, color='red', label='User Model')
@@ -141,7 +135,7 @@ def capcurve(y_values, y_preds_proba):
     
     plt.xlim(0, 1.02)
     plt.ylim(0, 1.25)
-    plt.title("CAP Curve - a_r value ="+str(ar_value))
+    plt.title("Naive Bayes")
     plt.xlabel('% of the data')
     plt.ylabel('% of positive obs')
     plt.legend()
@@ -163,8 +157,11 @@ if __name__ == '__main__':
     y_pred = classifier.predict(X_test)
     
     #calculation of the k-fold accuracy
-    k_fold_accuracy = cross_val_score(estimator = classifier, X = X_train, y = y_train, cv = 10)
-    k_fold_accuracy = k_fold_accuracy.mean()
+    k_fold_accuracy_train = cross_val_score(estimator = classifier, X = X_train, y = y_train, cv = 20)
+    k_fold_accuracy_train = k_fold_accuracy_train.mean()
+    
+    k_fold_accuracy_test = cross_val_score(estimator = classifier, X = X_test, y = y_test, cv = 20)
+    k_fold_accuracy_test = k_fold_accuracy_test.mean()
         
     #calculations of the probabilities
     y_proba = classifier.predict_proba(X_test)
@@ -177,6 +174,9 @@ if __name__ == '__main__':
 # naive_bayes = 0.87232, **train/test ratio** = 75/25
 # naive_bayes = 0.86795, **train/test ratio** = 80/20    
 
+'''Final result: k_fold_accuracy_train = 82.580
+                 k_fold_accuracy_test = 86.868 
+'''
 
 
 
