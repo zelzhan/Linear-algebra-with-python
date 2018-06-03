@@ -130,12 +130,6 @@ def capcurve(y_values, y_preds_proba):
         val_x2 = xx[row_index+1]
         val = val_y1 + ((val_x2 - percent)/(val_x2 - val_x1))*(val_y2 - val_y1)
     
-    sigma_ideal = 1 * xx[num_pos_obs - 1 ] / 2 + (xx[num_count - 1] - xx[num_pos_obs]) * 1
-    sigma_model = integrate.simps(yy,xx)
-    sigma_random = integrate.simps(xx,xx)
-    
-    ar_value = (sigma_model - sigma_random) / (sigma_ideal - sigma_random)
-    
     fig, ax = plt.subplots(nrows = 1, ncols = 1)
     ax.plot(ideal['x'],ideal['y'], color='grey', label='Perfect Model')
     ax.plot(xx,yy, color='red', label='User Model')
@@ -145,7 +139,7 @@ def capcurve(y_values, y_preds_proba):
     
     plt.xlim(0, 1.02)
     plt.ylim(0, 1.25)
-    plt.title("CAP Curve - a_r value ="+str(ar_value))
+    plt.title("Decision Tree")
     plt.xlabel('% of the data')
     plt.ylabel('% of positive obs')
     plt.legend()
@@ -187,8 +181,8 @@ if __name__ == '__main__':
 # naive_bayes = 0.87232, **train/test ratio** = 75/25
 # naive_bayes = 0.86795, **train/test ratio** = 80/20    
 
-'''Final result: k_fold_accuracy_train = 82.580
-                 k_fold_accuracy_test = 86.868 
+'''Final result: k_fold_accuracy_train = 86.863
+                 k_fold_accuracy_test = 86.186 
 '''
     
     
