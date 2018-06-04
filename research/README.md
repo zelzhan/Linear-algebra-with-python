@@ -6,7 +6,7 @@
 |  Naive Bayes                |     86.868      |**priors** = None, **train/test ratio** = 75/25                 |
 |  Support Vector Machine     |     90.186      |**kernel** = 'rbf, **probability** = True                       |
 |  Random Forest              |     90.170      | **trees** = 1000, **oob_score** = True, **criterion** = 'gini' |
-|  Logistic Regression        |     90.170      ||
+|  Logistic Regression        |                 ||
 
 # Attempts: #
 (Reasoning of choosing such parameters see in the paper)
