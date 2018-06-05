@@ -157,11 +157,12 @@ if __name__ == '__main__':
     y_pred = classifier.predict(X_test)
     
     #calculation of the k-fold accuracy
-    k_fold_accuracy_train = cross_val_score(estimator = classifier, X = X_train, y = y_train, cv = 20)
-    k_fold_accuracy_train = k_fold_accuracy_train.mean()
+    k_fold_accuracy_train = cross_val_score(estimator = classifier, X = X_train, y = y_train, cv = 10)
+    k_fold_accuracy_train_mean = k_fold_accuracy_train.mean()
     
-    k_fold_accuracy_test = cross_val_score(estimator = classifier, X = X_test, y = y_test, cv = 20)
-    k_fold_accuracy_test = k_fold_accuracy_test.mean()
+    k_fold_accuracy_test = cross_val_score(estimator = classifier, X = X_test, y = y_test, cv = 10)
+    k_fold_accuracy_test_variance = k_fold_accuracy_test.std()
+    k_fold_accuracy_test_mean = k_fold_accuracy_test.mean()
         
     #calculations of the probabilities
     y_proba = classifier.predict_proba(X_test)
@@ -175,7 +176,8 @@ if __name__ == '__main__':
 # naive_bayes = 0.86795, **train/test ratio** = 80/20    
 
 '''Final result: k_fold_accuracy_train = 82.580
-                 k_fold_accuracy_test = 86.868 
+                 k_fold_accuracy_test = 86.395
+                 variance = 0.109
 '''
 
 

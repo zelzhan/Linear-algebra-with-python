@@ -181,7 +181,7 @@ if __name__ == '__main__':
 # random forest = 89.55  1000 trees 'entropy
 
 '''Final result: k_fold_accuracy_train = 89.574
-                 k_fold_accuracy_test = 90.170 
+                 k_fold_accuracy_test = 90.233
                  variance = 0.0172
 '''
 
