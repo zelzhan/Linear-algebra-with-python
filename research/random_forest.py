@@ -79,7 +79,7 @@ def scale(X_train, X_test):
     X_test = sc.transform(X_test)
     return X_train, X_test
 
-def train(X_train, y_train):
+def f_train(X_train, y_train):
     # Fitting Kernel SVM to the Training set
     classifier = RandomForestClassifier(n_jobs = -1, n_estimators = 100, criterion = 'gini', oob_score = True)
     classifier.fit(X_train, y_train)

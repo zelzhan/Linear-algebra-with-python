@@ -80,7 +80,7 @@ def scale(X_train, X_test):
     X_test = sc.transform(X_test)
     return X_train, X_test
 
-def train(X_train, y_train):
+def n_train(X_train, y_train):
     # Fitting Kernel SVM to the Training set
     classifier = GaussianNB()
     classifier.fit(X_train, y_train)

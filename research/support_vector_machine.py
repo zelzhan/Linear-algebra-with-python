@@ -77,7 +77,7 @@ def scale(X_train, X_test):
     X_test = sc.transform(X_test)
     return X_train, X_test
 
-def train(X_train, y_train):
+def s_train(X_train, y_train):
     # Fitting Kernel SVM to the Training set
     from sklearn.svm import SVC
     classifier = SVC(kernel = 'rbf', probability = True)

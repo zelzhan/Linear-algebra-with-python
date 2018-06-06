@@ -23,7 +23,10 @@ from functools import reduce
 from sklearn.model_selection import cross_val_score
 import scikitplot as skplt
 import matplotlib.pyplot as plt
-
+from k_nearest_neighbours import k_train
+from random_forest import f_train
+from support_vector_machine import s_train
+from naive_bayes import n_train
 # Importing the dataset
 def import_dataset(dataset):
     dataset = pd.read_csv(dataset , sep=";")
@@ -176,8 +179,264 @@ if __name__ == '__main__':
     
     #plotting the roccurve
     roccurve(y_test, y_proba)
-    capcurve(y_test, y_proba)
+#    capcurve(y_test, y_proba)
+    
+    
+    
+    
+    y_values = y_test
+    y_preds_proba = y_proba
+    
+    num_pos_obs = np.sum(y_values)
+    num_count = len(y_values)
+    rate_pos_obs = float(num_pos_obs) / float(num_count)
+    ideal = pd.DataFrame({'x':[0,rate_pos_obs,1],'y':[0,1,1]})
+    xx = np.arange(num_count) / float(num_count - 1)
+    
+    y_cap = np.c_[y_values,y_preds_proba]
+    y_cap_df_s = pd.DataFrame(data=y_cap)
+    y_cap_df_s = y_cap_df_s.sort_values([1], ascending=True).reset_index(level = y_cap_df_s.index.names, drop=True)
+    
+    print(y_cap_df_s.head(20))
+    
+    yy = np.cumsum(y_cap_df_s[0]) / float(num_pos_obs)
+    yy = np.append([0], yy[0:num_count-1]) #add the first curve point (0,0) : for xx=0 we have yy=0
+    
+    percent = 0.5
+    row_index = int(np.trunc(num_count * percent))
+    
+    val_y1 = yy[row_index]
+    val_y2 = yy[row_index+1]
+    if val_y1 == val_y2:
+        val = val_y1*1.0
+    else:
+        val_x1 = xx[row_index]
+        val_x2 = xx[row_index+1]
+        val = val_y1 + ((val_x2 - percent)/(val_x2 - val_x1))*(val_y2 - val_y1)
+    
+    
+    xx1 = xx
+    yy1 = yy
+    
+    
+    
+    
+    
+    #----------------------------------------
+    X_train, X_test, y_train, y_test = preprocessing(dataset)
+    
+    #training of the classifier
+    classifier = k_train(X_train, y_train) 
+    
+    #prediction process
+    y_pred = classifier.predict(X_test)
+    
+    #calculation of the k-fold accuracy
+    k_fold_accuracy_train = cross_val_score(estimator = classifier, X = X_train, y = y_train, cv = 10)
+    k_fold_accuracy_train_mean = k_fold_accuracy_train.mean()
+    
+    k_fold_accuracy_test = cross_val_score(estimator = classifier, X = X_test, y = y_test, cv = 10)
+    k_fold_accuracy_test_variance = k_fold_accuracy_test.std()
+    k_fold_accuracy_test_mean = k_fold_accuracy_test.mean()
+        
+    #calculations of the probabilities
+    y_proba = classifier.predict_proba(X_test)
+    #----------------------------------------
+    
+    
+    
+    
+    
+    
+    
+    y_values = y_test
+    y_preds_proba = y_proba
+    
+    num_pos_obs = np.sum(y_values)
+    num_count = len(y_values)
+    rate_pos_obs = float(num_pos_obs) / float(num_count)
+    ideal = pd.DataFrame({'x':[0,rate_pos_obs,1],'y':[0,1,1]})
+    xx = np.arange(num_count) / float(num_count - 1)
+    
+    y_cap = np.c_[y_values,y_preds_proba]
+    y_cap_df_s = pd.DataFrame(data=y_cap)
+    y_cap_df_s = y_cap_df_s.sort_values([1], ascending=True).reset_index(level = y_cap_df_s.index.names, drop=True)
+    
+    print(y_cap_df_s.head(20))
+    
+    yy = np.cumsum(y_cap_df_s[0]) / float(num_pos_obs)
+    yy = np.append([0], yy[0:num_count-1]) #add the first curve point (0,0) : for xx=0 we have yy=0
+    
+    percent = 0.5
+    row_index = int(np.trunc(num_count * percent))
+    
+    val_y1 = yy[row_index]
+    val_y2 = yy[row_index+1]
+    if val_y1 == val_y2:
+        val = val_y1*1.0
+    else:
+        val_x1 = xx[row_index]
+        val_x2 = xx[row_index+1]
+        val = val_y1 + ((val_x2 - percent)/(val_x2 - val_x1))*(val_y2 - val_y1)
 
+    xx2 = xx
+    yy2 = yy
+    
+    
+    
+    #---------------------------------
+    X_train, X_test, y_train, y_test = preprocessing(dataset)
+    
+    #training of the classifier
+    classifier = f_train(X_train, y_train) 
+    
+    #prediction process
+    y_pred = classifier.predict(X_test)
+    
+    #calculation of the k-fold accuracy
+    k_fold_accuracy_train = cross_val_score(estimator = classifier, X = X_train, y = y_train, cv = 10)
+    k_fold_accuracy_train_mean = k_fold_accuracy_train.mean()
+    
+    k_fold_accuracy_test = cross_val_score(estimator = classifier, X = X_test, y = y_test, cv = 10)
+    k_fold_accuracy_test_variance = k_fold_accuracy_test.std()
+    k_fold_accuracy_test_mean = k_fold_accuracy_test.mean()
+        
+    #calculations of the probabilities
+    y_proba = classifier.predict_proba(X_test)
+    #--------------------------------------------
+    
+    y_values = y_test
+    y_preds_proba = y_proba
+    
+    num_pos_obs = np.sum(y_values)
+    num_count = len(y_values)
+    rate_pos_obs = float(num_pos_obs) / float(num_count)
+    ideal = pd.DataFrame({'x':[0,rate_pos_obs,1],'y':[0,1,1]})
+    xx = np.arange(num_count) / float(num_count - 1)
+    
+    y_cap = np.c_[y_values,y_preds_proba]
+    y_cap_df_s = pd.DataFrame(data=y_cap)
+    y_cap_df_s = y_cap_df_s.sort_values([1], ascending=True).reset_index(level = y_cap_df_s.index.names, drop=True)
+    
+    print(y_cap_df_s.head(20))
+    
+    yy = np.cumsum(y_cap_df_s[0]) / float(num_pos_obs)
+    yy = np.append([0], yy[0:num_count-1]) #add the first curve point (0,0) : for xx=0 we have yy=0
+    
+    percent = 0.5
+    row_index = int(np.trunc(num_count * percent))
+    
+    val_y1 = yy[row_index]
+    val_y2 = yy[row_index+1]
+    if val_y1 == val_y2:
+        val = val_y1*1.0
+    else:
+        val_x1 = xx[row_index]
+        val_x2 = xx[row_index+1]
+        val = val_y1 + ((val_x2 - percent)/(val_x2 - val_x1))*(val_y2 - val_y1)
+        
+    xx3 = xx
+    yy3 = yy
+        
+        
+        
+    #--------------------------------------------------
+    X_train, X_test, y_train, y_test = preprocessing(dataset)
+    
+    #training of the classifier
+    classifier = s_train(X_train, y_train) 
+    
+    #prediction process
+    y_pred = classifier.predict(X_test)
+    
+    #calculation of the k-fold accuracy
+    k_fold_accuracy_train = cross_val_score(estimator = classifier, X = X_train, y = y_train, cv = 10)
+    k_fold_accuracy_train_mean = k_fold_accuracy_train.mean()
+    
+    k_fold_accuracy_test = cross_val_score(estimator = classifier, X = X_test, y = y_test, cv = 10)
+    k_fold_accuracy_test_variance = k_fold_accuracy_test.std()
+    k_fold_accuracy_test_mean = k_fold_accuracy_test.mean()
+        
+    #calculations of the probabilities
+    y_proba = classifier.predict_proba(X_test)
+    #--------------------------------------------------
+    
+    
+    
+    y_values = y_test
+    y_preds_proba = y_proba
+    
+    num_pos_obs = np.sum(y_values)
+    num_count = len(y_values)
+    rate_pos_obs = float(num_pos_obs) / float(num_count)
+    ideal = pd.DataFrame({'x':[0,rate_pos_obs,1],'y':[0,1,1]})
+    xx = np.arange(num_count) / float(num_count - 1)
+    
+    y_cap = np.c_[y_values,y_preds_proba]
+    y_cap_df_s = pd.DataFrame(data=y_cap)
+    y_cap_df_s = y_cap_df_s.sort_values([1], ascending=True).reset_index(level = y_cap_df_s.index.names, drop=True)
+    
+    print(y_cap_df_s.head(20))
+    
+    yy = np.cumsum(y_cap_df_s[0]) / float(num_pos_obs)
+    yy = np.append([0], yy[0:num_count-1]) #add the first curve point (0,0) : for xx=0 we have yy=0
+    
+    percent = 0.5
+    row_index = int(np.trunc(num_count * percent))
+    
+    val_y1 = yy[row_index]
+    val_y2 = yy[row_index+1]
+    if val_y1 == val_y2:
+        val = val_y1*1.0
+    else:
+        val_x1 = xx[row_index]
+        val_x2 = xx[row_index+1]
+        val = val_y1 + ((val_x2 - percent)/(val_x2 - val_x1))*(val_y2 - val_y1)
+    
+    xx4 = xx
+    yy4 = yy
+    
+    #------------------------------------------------------
+    X_train, X_test, y_train, y_test = preprocessing(dataset)
+    
+    #training of the classifier
+    classifier = n_train(X_train, y_train) 
+    
+    #prediction process
+    y_pred = classifier.predict(X_test)
+    
+    #calculation of the k-fold accuracy
+    k_fold_accuracy_train = cross_val_score(estimator = classifier, X = X_train, y = y_train, cv = 10)
+    k_fold_accuracy_train_mean = k_fold_accuracy_train.mean()
+    
+    k_fold_accuracy_test = cross_val_score(estimator = classifier, X = X_test, y = y_test, cv = 10)
+    k_fold_accuracy_test_variance = k_fold_accuracy_test.std()
+    k_fold_accuracy_test_mean = k_fold_accuracy_test.mean()
+        
+    #calculations of the probabilities
+    y_proba = classifier.predict_proba(X_test)
+    #_------------------------------------------------------
+    
+    fig, ax = plt.subplots(nrows = 1, ncols = 1)
+    ax.plot(ideal['x'],ideal['y'], color='grey', label='Perfect Model')
+    ax.plot(xx,  yy, label='Naive Bayes')
+    ax.plot(xx1, yy1, label='Logistic regression')
+    ax.plot(xx3, yy3, label='Random Forest')
+    ax.plot(xx2, yy2, label='KNN')
+    ax.plot(xx4, yy4, label='Support Vector Machine')
+    ax.plot(xx,xx, color='blue', label='Random Model')
+    ax.plot([percent, percent], [0.0, val], color='green', linestyle='--', linewidth=1)
+#    ax.plot([0, percent], [val, val], color='green', linestyle='--', linewidth=1, label=str(round(val*100, 2))+'% of positive obs at '+str(percent*100)+'%')
+    
+    plt.xlim(0, 1.02)
+    plt.ylim(0, 1.25)
+    plt.title("Decision Tree")
+    plt.xlabel('% of the data')
+    plt.ylabel('% of positive obs')
+    plt.legend()
+    
+    
+    plt.savefig("DE_cap_fig.pdf")
     
 # naive_bayes = 0.87232, **train/test ratio** = 75/25
 # naive_bayes = 0.86795, **train/test ratio** = 80/20    

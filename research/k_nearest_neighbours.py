@@ -78,7 +78,7 @@ def scale(X_train, X_test):
     X_test = sc.transform(X_test)
     return X_train, X_test
 
-def train(X_train, y_train):
+def k_train(X_train, y_train):
     
     classifier = KNeighborsClassifier(n_neighbors = 5, metric='minkowski',p=2)
     classifier.fit(X_train,y_train)
