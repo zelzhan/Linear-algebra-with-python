@@ -27,6 +27,7 @@ from k_nearest_neighbours import k_train
 from random_forest import f_train
 from support_vector_machine import s_train
 from naive_bayes import n_train
+from ann import a_train
 # Importing the dataset
 def import_dataset(dataset):
     dataset = pd.read_csv(dataset , sep=";")
@@ -417,13 +418,71 @@ if __name__ == '__main__':
     y_proba = classifier.predict_proba(X_test)
     #_------------------------------------------------------
     
+    xx5 = xx
+    yy5 = yy
+    
+    y_values = y_test
+    y_preds_proba = y_proba
+    
+    num_pos_obs = np.sum(y_values)
+    num_count = len(y_values)
+    rate_pos_obs = float(num_pos_obs) / float(num_count)
+    ideal = pd.DataFrame({'x':[0,rate_pos_obs,1],'y':[0,1,1]})
+    xx = np.arange(num_count) / float(num_count - 1)
+    
+    y_cap = np.c_[y_values,y_preds_proba]
+    y_cap_df_s = pd.DataFrame(data=y_cap)
+    y_cap_df_s = y_cap_df_s.sort_values([1], ascending=True).reset_index(level = y_cap_df_s.index.names, drop=True)
+    
+    print(y_cap_df_s.head(20))
+    
+    yy = np.cumsum(y_cap_df_s[0]) / float(num_pos_obs)
+    yy = np.append([0], yy[0:num_count-1]) #add the first curve point (0,0) : for xx=0 we have yy=0
+    
+    percent = 0.5
+    row_index = int(np.trunc(num_count * percent))
+    
+    val_y1 = yy[row_index]
+    val_y2 = yy[row_index+1]
+    if val_y1 == val_y2:
+        val = val_y1*1.0
+    else:
+        val_x1 = xx[row_index]
+        val_x2 = xx[row_index+1]
+        val = val_y1 + ((val_x2 - percent)/(val_x2 - val_x1))*(val_y2 - val_y1)
+    
+    #-----------------------------------------------
+    X_train, X_test, y_train, y_test = preprocessing(dataset)
+    
+    #training of the classifier
+#    classifier = train(X_train, y_train) 
+    
+    #prediction process
+   
+    
+    
+    from keras.wrappers.scikit_learn import KerasClassifier
+    from sklearn.model_selection import cross_val_score
+
+
+    classifier = KerasClassifier(build_fn = a_train,batch_size=32,epochs=300)
+    
+    classifier.fit(X_train, y_train)
+    
+    y_proba = classifier.predict(X_test)
+    y_pred = (y_proba > 0.5)
+    y_proba = classifier.predict_proba(X_test)
+    
+    #----------------------------------------------
+    
     fig, ax = plt.subplots(nrows = 1, ncols = 1)
     ax.plot(ideal['x'],ideal['y'], color='grey', label='Perfect Model')
-    ax.plot(xx,  yy, label='Naive Bayes')
+    ax.plot(xx,  yy, label='ANN')
     ax.plot(xx1, yy1, label='Logistic regression')
     ax.plot(xx3, yy3, label='Random Forest')
     ax.plot(xx2, yy2, label='KNN')
     ax.plot(xx4, yy4, label='Support Vector Machine')
+    ax.plot(xx5, yy5, label="Naive Bayes")
     ax.plot(xx,xx, color='blue', label='Random Model')
     ax.plot([percent, percent], [0.0, val], color='green', linestyle='--', linewidth=1)
 #    ax.plot([0, percent], [val, val], color='green', linestyle='--', linewidth=1, label=str(round(val*100, 2))+'% of positive obs at '+str(percent*100)+'%')
