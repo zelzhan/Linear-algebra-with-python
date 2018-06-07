@@ -2,7 +2,7 @@
 
 My implementation of machine learning stuff
 
-First of all should mention the research paper written about [Machine learning]https://github.com/zelzhan/Machine-learning/tree/master/research
+First of all should mention the research paper written about [Machine learning](https://github.com/zelzhan/Machine-learning/tree/master/research)
 
 ## Getting Started
 
