@@ -43,4 +43,4 @@
 |     1   |**criterion** = 'entropy', **train/test ratio** = 75/25        | 86.69           |
 |     2   |**criterion** = 'entropy'  **train/test ratio** = 80/20        | 87.27           |
 
-## Results of the other algorithms see in the source code ##
+ **_Results of the other algorithms see in the source code_** 
