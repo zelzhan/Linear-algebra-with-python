@@ -2,7 +2,7 @@
 
 My implementation of machine learning stuff
 
-First of all should mention the research paper written about [Machine learning](https://github.com/zelzhan/Machine-learning/tree/master/research)
+First of all should mention the [research](https://github.com/zelzhan/Machine-learning/tree/master/research) paper that I have done
 
 ## Getting Started
 
@@ -27,7 +27,6 @@ Then make aliasses for default versions of python and pip in the /.bashsrc:
 ```
 alias python = python3
 alias pip = pip3
-
 ```
 
 Create and activate enviroment via anaconda and install all packages required in the requirements.txt
@@ -35,7 +34,6 @@ Create and activate enviroment via anaconda and install all packages required in
 ```
 conda create yourenvname
 source activate yourenvname
-
 ```
 
 ## Authors
@@ -52,4 +50,3 @@ This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md
 
 * Inspired and guided with [Adnan Yazici](https://sst.nu.edu.kz/adnan-yazici-phd/)
 * Glad to have good programming team "Depressed and Funny"
-
