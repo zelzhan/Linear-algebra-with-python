@@ -9,7 +9,7 @@
 |  Logistic Regression        |                 ||
 
 
-![Alt text](ROC_and_CAP_curves/Cap_graphs.pdf?raw=true "Title")
+![Alt text](ROC_and_CAP_curves/Cap_graphs-1.png?raw=true "Title")
 
 # Attempts: #
 (Reasoning of choosing such parameters see in the paper)
