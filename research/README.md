@@ -8,6 +8,9 @@
 |  Random Forest              |     90.170      | **trees** = 1000, **oob_score** = True, **criterion** = 'gini' |
 |  Logistic Regression        |                 ||
 
+
+![Alt text](ROC_and_CAP_curves/Cap_graphs.pdf?raw=true "Title")
+
 # Attempts: #
 (Reasoning of choosing such parameters see in the paper)
 
@@ -25,8 +28,8 @@
 ￼
 
 
-| Attempt | Parameters                                                       | Accuracy %      | 
-| ------- | ---------------------------------------------------------------- | --------------- | 
+| Attempt | Parameters                                                       | Accuracy %      |
+| ------- | ---------------------------------------------------------------- | --------------- |
 |     1   |**trees** = 100, **oob_score** = True, **criterion** = 'gini'     | 89.97           |
 |     2   |**trees** = 100, **oob_score** = True, **criterion** = 'entropy'  | 89.48           |
 |     3   |**trees** = 500, **oob_score** = True, **criterion** = 'gini'     | 89.88           |
@@ -44,12 +47,11 @@
 
 ### SVM: ##
 #
-#| Attempt | Parameters                                                       | Accuracy %      | 
-#| ------- | ---------------------------------------------------------------- | --------------- | 
+#| Attempt | Parameters                                                       | Accuracy %      |
+#| ------- | ---------------------------------------------------------------- | --------------- |
 #|     1   |**trees** = 100, **oob_score** = True, **criterion** = 'gini'     | 89.97           |
 #|     2   |**trees** = 100, **oob_score** = True, **criterion** = 'entropy'  | 89.48           |
 #|     3   |**trees** = 500, **oob_score** = True, **criterion** = 'gini'     | 89.88           |
 #|     4   |**trees** = 500, **oob_score** = True, **criterion** = 'entropy'  | 89.85           |
 #|     5   |**trees** = 1000, **oob_score** = True, **criterion** = 'gini'    | 89.67           |
 #|     6   |**trees** = 1000, **oob_score** = True, **criterion** = 'entropy' | 89.55           |
-
