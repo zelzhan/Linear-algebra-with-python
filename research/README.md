@@ -29,11 +29,6 @@
 
 | Attempt | Parameters                                           | Accuracy %      |
 | ------- | ---------------------------------------------------- | --------------- |
-|     1   |**priors** = None, **train/test ratio** = 75/25       | 87.23           |
-|     2   |**priors** = None, **train/test ratio** = 80/20       | 86.79           |
-￼
-| Attempt | Parameters                                                       | Accuracy %      |
-| ------- | ---------------------------------------------------------------- | --------------- |
 |     1   |**trees** = 100, **oob_score** = True, **criterion** = 'gini'     | 89.97           |
 |     2   |**trees** = 100, **oob_score** = True, **criterion** = 'entropy'  | 89.48           |
 |     3   |**trees** = 500, **oob_score** = True, **criterion** = 'gini'     | 89.88           |
