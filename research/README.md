@@ -7,8 +7,8 @@
 |  Random Forest              |     90.884      | **trees** = 1000, **oob_score** = True, **criterion** = 'gini' |
 |  Logistic Regression        |     86.185      ||
 
-
-### According to the CAP curve analysis, the best result among the algorithms showed Random Forest with significant growth in accuracy and CAP curve performance ###
+### Results ###
+ According to the CAP curve analysis, the best result among the algorithms showed Random Forest with significant growth in accuracy and CAP curve performance
 
 ![Alt text](ROC_and_CAP_curves/Cap_graphs-1.png?raw=true "Title")
 
