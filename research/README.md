@@ -5,7 +5,7 @@
 |  Naive Bayes                |     86.868      |**priors** = None, **train/test ratio** = 75/25                 |
 |  Support Vector Machine     |     90.186      |**kernel** = 'rbf, **probability** = True                       |
 |  Random Forest              |     90.884      | **trees** = 1000, **oob_score** = True, **criterion** = 'gini' |
-|  Logistic Regression        |     86.185      ||
+|  Logistic Regression        |     86.185      | **None** |
 
 ### Results ###
  According to the CAP curve analysis, the best result among the algorithms showed Random Forest with significant growth in accuracy and CAP curve performance
