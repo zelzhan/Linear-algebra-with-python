@@ -4,6 +4,15 @@ My implementation of machine learning stuff
 
 First of all should mention the [research](https://github.com/zelzhan/Machine-learning/tree/master/research) paper that I have done
 
+## Articles
+
+### Artificial Neural Network
+[] Yann LeCun - 1998 - [Efficient BackPropogation](http://yann.lecun.com/exdb/publis/pdf/lecun-98b.pdf)
+[]
+[]
+
+
+
 ## Getting Started
 
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
