@@ -7,9 +7,9 @@ First of all should mention the [research](https://github.com/zelzhan/Machine-le
 ## Articles
 
 ### Artificial Neural Network
-- [] Yann LeCun - 1998 - [Efficient BackPropogation](http://yann.lecun.com/exdb/publis/pdf/lecun-98b.pdf)
-- []
-- []
+- [ ] Yann LeCun - 1998 - [Efficient BackPropogation](http://yann.lecun.com/exdb/publis/pdf/lecun-98b.pdf)
+- [ ]
+- [ ]
 
 
 
