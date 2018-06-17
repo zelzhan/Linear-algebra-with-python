@@ -24,7 +24,7 @@ First of all should mention the [research](https://github.com/zelzhan/Machine-le
 
 ## Tools
 
-* Vizualizatoin of CNN - [Digit recognition](scs.ryerson.ca/~aharley/vis/conv/flat.html)
+* Vizualizatoin of CNN - [Digit recognition](http://scs.ryerson.ca/~aharley/vis/conv/flat.html)
 
 
 ## Getting Started
