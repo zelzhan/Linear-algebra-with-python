@@ -22,7 +22,9 @@ First of all should mention the [research](https://github.com/zelzhan/Machine-le
 - [ ] Rob DiPietro - *2016* - [A Friendly Introduction to Cross-Entropy Loss](https://rdipietro.github.io/friendly-intro-to-cross-entropy-loss/)
 - [ ] Peter Roelants - *2016* - [How to implement a neural network Intermezzo 2](http://peterroelants.github.io/posts/neural_network_implementation_intermezzo02/)
 
-###
+## Tools
+
+* Vizualizatoin of CNN - [Digit recognition](scs.ryerson.ca/~aharley/vis/conv/flat.html)
 
 
 ## Getting Started
