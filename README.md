@@ -18,9 +18,9 @@ First of all should mention the [research](https://github.com/zelzhan/Machine-le
 - [X] Jay Kuo - *2016* - [Understanding Convolutional Neural Networks with A Mathematical Model](https://arxiv.org/pdf/1609.04112.pdf)
 - [X] Kaiming He - *2015* - [Delving Deep into Rectifiers: Surpassing Human-Level Performance on ImageNet Classification](https://arxiv.org/pdf/1502.01852.pdf)
 - [X] Dominik Scherer - *2010* - [Evaluation of Pooling Operations in Convolutional Architectures for Object Recognition](http://ais.uni-bonn.de/papers/icann2010_maxpool.pdf)
-- [X] Adit Deshpande - *2016* - [The 9 Deep Learning Papers You Need To Know About (Understanding CNNs Part 3)](http://ais.uni-bonn.de/papers/icann2010_maxpool.pdf)
-- [X] Rob DiPietro - *2016* - [A Friendly Introduction to Cross-Entropy Loss](https://rdipietro.github.io/friendly-intro-to-cross-entropy-loss/)
-- [X] Peter Roelants - *2016* - [How to implement a neural network Intermezzo 2](http://peterroelants.github.io/posts/neural_network_implementation_intermezzo02/)
+- [ ] Adit Deshpande - *2016* - [The 9 Deep Learning Papers You Need To Know About (Understanding CNNs Part 3)](http://ais.uni-bonn.de/papers/icann2010_maxpool.pdf)
+- [ ] Rob DiPietro - *2016* - [A Friendly Introduction to Cross-Entropy Loss](https://rdipietro.github.io/friendly-intro-to-cross-entropy-loss/)
+- [ ] Peter Roelants - *2016* - [How to implement a neural network Intermezzo 2](http://peterroelants.github.io/posts/neural_network_implementation_intermezzo02/)
 
 ## Tools
 
