@@ -2,25 +2,25 @@
 
 My implementation of machine learning stuff
 
-First of all should mention the [research](https://github.com/zelzhan/Machine-learning/tree/master/research) paper that I have done
+First of all should mention the [research](https://github.com/zelzhan/Machine-learning/blob/master/research/Comparative%20study%20of%20the%20classification%20models%20for%20prediction%20of%20the%20bank%20telemarketing%20efficiency.pdf) paper and [accompanying code](https://github.com/zelzhan/Machine-learning/tree/master/research) that I have done
 
 ## Articles
 
 ### Artificial Neural Networks (ANN)
-- [ ] Yann LeCun - *1998* - [Efficient BackPropogation](http://yann.lecun.com/exdb/publis/pdf/lecun-98b.pdf)
-- [ ] Xavier Glorot - *2011* - [Deep sparse rectifier neural networks](http://proceedings.mlr.press/v15/glorot11a/glorot11a.pdf)
-- [ ] Michael Nielsen - *2015* - [Neural Networks and Deep learning](http://neuralnetworksanddeeplearning.com/chap2.html)
+- [X] Yann LeCun - *1998* - [Efficient BackPropogation](http://yann.lecun.com/exdb/publis/pdf/lecun-98b.pdf)
+- [X] Xavier Glorot - *2011* - [Deep sparse rectifier neural networks](http://proceedings.mlr.press/v15/glorot11a/glorot11a.pdf)
+- [X] Michael Nielsen - *2015* - [Neural Networks and Deep learning](http://neuralnetworksanddeeplearning.com/chap2.html)
 
 ### Convolutional Neural Networks (CNN)
 
-- [ ] Yann LeCun - *1998* - [Gradient-Based Learning Applied to Document Recognition](http://yann.lecun.com/exdb/publis/pdf/lecun-01a.pdf)
-- [ ] Jianxin Wu - *2017* - [Introduction to Convolutional Neural Networks](https://pdfs.semanticscholar.org/450c/a19932fcef1ca6d0442cbf52fec38fb9d1e5.pdf)
-- [ ] Jay Kuo - *2016* - [Understanding Convolutional Neural Networks with A Mathematical Model](https://arxiv.org/pdf/1609.04112.pdf)
-- [ ] Kaiming He - *2015* - [Delving Deep into Rectifiers: Surpassing Human-Level Performance on ImageNet Classification](https://arxiv.org/pdf/1502.01852.pdf)
-- [ ] Dominik Scherer - *2010* - [Evaluation of Pooling Operations in Convolutional Architectures for Object Recognition](http://ais.uni-bonn.de/papers/icann2010_maxpool.pdf)
-- [ ] Adit Deshpande - *2016* - [The 9 Deep Learning Papers You Need To Know About (Understanding CNNs Part 3)](http://ais.uni-bonn.de/papers/icann2010_maxpool.pdf)
-- [ ] Rob DiPietro - *2016* - [A Friendly Introduction to Cross-Entropy Loss](https://rdipietro.github.io/friendly-intro-to-cross-entropy-loss/)
-- [ ] Peter Roelants - *2016* - [How to implement a neural network Intermezzo 2](http://peterroelants.github.io/posts/neural_network_implementation_intermezzo02/)
+- [X] Yann LeCun - *1998* - [Gradient-Based Learning Applied to Document Recognition](http://yann.lecun.com/exdb/publis/pdf/lecun-01a.pdf)
+- [X] Jianxin Wu - *2017* - [Introduction to Convolutional Neural Networks](https://pdfs.semanticscholar.org/450c/a19932fcef1ca6d0442cbf52fec38fb9d1e5.pdf)
+- [X] Jay Kuo - *2016* - [Understanding Convolutional Neural Networks with A Mathematical Model](https://arxiv.org/pdf/1609.04112.pdf)
+- [X] Kaiming He - *2015* - [Delving Deep into Rectifiers: Surpassing Human-Level Performance on ImageNet Classification](https://arxiv.org/pdf/1502.01852.pdf)
+- [X] Dominik Scherer - *2010* - [Evaluation of Pooling Operations in Convolutional Architectures for Object Recognition](http://ais.uni-bonn.de/papers/icann2010_maxpool.pdf)
+- [X] Adit Deshpande - *2016* - [The 9 Deep Learning Papers You Need To Know About (Understanding CNNs Part 3)](http://ais.uni-bonn.de/papers/icann2010_maxpool.pdf)
+- [X] Rob DiPietro - *2016* - [A Friendly Introduction to Cross-Entropy Loss](https://rdipietro.github.io/friendly-intro-to-cross-entropy-loss/)
+- [X] Peter Roelants - *2016* - [How to implement a neural network Intermezzo 2](http://peterroelants.github.io/posts/neural_network_implementation_intermezzo02/)
 
 ## Tools
 
