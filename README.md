@@ -63,7 +63,7 @@ source activate yourenvname
 
 * **Elzhan Zeinulla** - *Most of the work has been done as experiment or ML practice* - [zelzhan](https://github.com/zelzhan)
 
-* **Karina Bekbayeva** - *Helped with writing of the research project and just coding buddy* - [karinabk](https://github.com/karinabk)
+* **Karina Bekbayeva** - *Co-author of the resaerch paper and coding buddy* - [karinabk](https://github.com/karinabk)
 
 ## License
 
