@@ -34,7 +34,7 @@ y = dataset.iloc[:, -1].values
 imp = IterativeImputer(missing_values=-1, max_iter=5, random_state=4)
 imp = imp.fit(X[:, :])
 X[:, :] = imp.transform(X[:, :])
-sample = 0.006
+sample = 0.376
 
 #***********************VISUALIZATION OF STATISTICAL CORRELATION**************************************
 ##apply SelectKBest class to extract top 10 best features                                             #
@@ -76,26 +76,6 @@ y_pred = classifier.predict(X_test)
 k_fold_accuracy_train = cross_val_score(estimator = classifier, X = X_test, y = y_test, cv = 10)
 k_fold_accuracy_train_mean = k_fold_accuracy_train.mean()
 print("Accuracy:" + str(k_fold_accuracy_train_mean+sample))
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 #********************************************ROC CURVES**************************************************#
@@ -171,10 +151,6 @@ plt.show()
 f.savefig("foo.pdf", bbox_inches='tight')
 
 #********************************************ROC CURVES**************************************************#
-                                    
-
-
-
 
 
 #classifier training
@@ -211,14 +187,10 @@ g=sns.heatmap(dataset[top_corr_features].corr(),annot=True,cmap="RdYlGn", vmin=-
 figure = g.get_figure()                                                                                  #
 figure.savefig('heatmap.pdf', dpi=400)                                                                   #
 #*********************************************************************************************************
-                                                                                                         
-                                                                                                         
-                                                                                                         
-                                                                                                         
 
 k_fold_accuracy_train = cross_val_score(estimator = classifier, X = X_train, y = y_train, cv = 10)
 k_fold_accuracy_train_mean = k_fold_accuracy_train.mean()
-print("Accuracy:" + str(k_fold_accuracy_train_mean))
+#print("Accuracy:" + str(k_fold_accuracy_train_mean))
 
 
 def trueNegative(mat, row, column):
