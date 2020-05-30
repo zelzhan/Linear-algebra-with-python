@@ -1,7 +1,8 @@
 import numpy as np
 import matplotlib.pyplot as plt
 import pandas as pd
-from sklearn.preprocessing import Imputer, LabelEncoder, OneHotEncoder, StandardScaler
+from sklearn.preprocessing import LabelEncoder, OneHotEncoder, StandardScaler
+from sklearn.impute import SimpleImputer as Imputer
 from sklearn.model_selection import train_test_split, cross_val_score, GridSearchCV
 from sklearn.svm import SVC
 from sklearn.metrics import accuracy_score
